@@ -5,6 +5,7 @@
     ?>
 
 <?php @include "./view/base/header.php" ?>
+
 <?php @include "./view/topNavBar.php" ?>
 
 <?php
