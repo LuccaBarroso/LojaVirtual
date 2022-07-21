@@ -14,6 +14,21 @@
             require_once("banco/database.php");
             include_once("./view/topNavBar.php");
             if(isset($_SESSION["logado"]) && $_SESSION["logado"]==true){
-                echo "<div class='d-flex justify-content-center'><p class='alert alert-success m-2' style='width:400px;'>"."Bem vindo ". htmlspecialchars($_SESSION["nome"]) ."!</p></div>";
+                if(isset($_SESSION["admin"]) && $_SESSION["admin"]=true){
+                    echo "
+                    <div class='d-flex justify-content-center'>
+                        <p class='alert alert-success m-2' style='width:400px;'>"
+                            ."Bem vindo ". htmlspecialchars($_SESSION["nome"]).
+                            " sua conta tem privilegios de admin <a href='./admin'>clique aqui para acessar o painel</a>" .
+                        "!</p>
+                    </div>";
+                }else{
+                    echo "
+                    <div class='d-flex justify-content-center'>
+                        <p class='alert alert-success m-2' style='width:400px;'>"
+                            ."Bem vindo ". htmlspecialchars($_SESSION["nome"]) ."!
+                        </p>
+                    </div>";
+                }
             }
         ?>

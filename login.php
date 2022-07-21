@@ -27,7 +27,7 @@
         }
         if($senha_error == "" && $email_error == ""){
          //checar se o usuario existe
-            $sql = "SELECT id, nome, senha FROM usuarios WHERE email = ?";
+            $sql = "SELECT id, nome, senha, 'admin' FROM usuarios WHERE email = ?";
             
             if($stmt = mysqli_prepare($db, $sql)){
                 mysqli_stmt_bind_param($stmt, "s", $param_email);
@@ -42,7 +42,7 @@
                     // se tiver um usuário, ele existe
                     if(mysqli_stmt_num_rows($stmt) == 1){
                         //checar se a senha bate com a criptografada no banco
-                        mysqli_stmt_bind_result($stmt, $id, $nome, $senha_criptografada);
+                        mysqli_stmt_bind_result($stmt, $id, $nome, $senha_criptografada, $admin);
                         if(mysqli_stmt_fetch($stmt)){
                             if(password_verify($senha, $senha_criptografada)){
                                 session_start();
@@ -51,6 +51,7 @@
                                 $_SESSION["logado"] = true;
                                 $_SESSION["id"] = $id;
                                 $_SESSION["nome"] = $nome;
+                                $_SESSION["admin"] = $admin;
 
                                 header("Location: http://localhost");
 
