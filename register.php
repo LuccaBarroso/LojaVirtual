@@ -3,22 +3,31 @@
     // require("model/userAuth.php");
     include_once("./view/base/top.php"); 
 
-    $senha_error = "";
+    $senha_error = $email_error = $nome_error = "";
     if(isset($_POST["nome"])){
         $nome = htmlspecialchars($_POST["nome"]);
+        if($nome == ""){
+            $nome_error = "É necessário que o usuário tenha um nome!";
+        }
     }
     if(isset($_POST["email"])){
         $email = htmlspecialchars($_POST["email"]);
+        if($email == ""){
+            $email_error = "É necessário que o usuário tenha um email!";
+        }
     }
     if(isset($_POST["senha"])){
         $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
+        if($_POST["senha"] == ""){
+            $senha_error = "É necessário que o usuário tenha uma senha!";
+        }
     }
     //checar se senhas são iguais
     if(isset($_POST["senha"]) && isset($_POST["confirmarSenha"]) && $_POST["senha"] !== $_POST["confirmarSenha"]){
         $senha_error="As senhas precisam ser iguais!";
     }
 
-    if($senha_error == ""){
+    if($senha_error == "" && $email_error == "" && $nome_error == ""){
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             //somente quando for post
@@ -50,10 +59,20 @@
             <label for="nome">Nome:</label>
             <input type="text" class="form-control" name="nome">
         </div>
+        <?php
+            if($nome_error != ""){
+                echo "<p class='alert alert-warning'>". $nome_error ."</p>";
+            }
+        ?>
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="text" class="form-control" name="email">
         </div>
+        <?php
+            if($email_error != ""){
+                echo "<p class='alert alert-warning'>". $email_error ."</p>";
+            }
+        ?>
         <div class="form-group">
             <label for="senha">senha:</label>
             <input type="password" class="form-control" name="senha">
