@@ -12,7 +12,10 @@
         $senha = htmlspecialchars($_POST["senha"]);
         echo $senha;
     }
-    
+
+    if (isset($_GET['success']) && $_GET['success']) {
+        echo "<div class='d-flex justify-content-center mt-2'><p class='alert alert-success m-2' style='width:400px;'>"."Registrado com sucesso!" ."!</p></div>";;
+    }
     
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($email == ""){

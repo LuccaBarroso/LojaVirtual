@@ -22,24 +22,23 @@
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             //somente quando for post
-        $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
-        $stmt = mysqli_prepare($db, $sql);
-        // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_email, $param_senha);
+            $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
+            $stmt = mysqli_prepare($db, $sql);
+            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_email, $param_senha);
+                
+            // Set parameters
+            $param_name = $nome;
+            $param_email = $email;
+            $param_senha = $senha; // Creates a password hash
             
-        // Set parameters
-        $param_name = $nome;
-        $param_email = $email;
-        $param_senha = $senha; // Creates a password hash
-        
-        // Attempt to execute the prepared statement
-        if(mysqli_stmt_execute($stmt)){
-            // Redirect to login page
-            header("location: http://localhost/login.php");
-        }else{
-            // header("Location: http://localhost/error.php?msg="."Falha ao criar usuário");
+            //tenta executar
+            if(mysqli_stmt_execute($stmt)){
+                // deu certo, vai pra login
+                header("location: http://localhost/login.php?success=true");
+            }else{
+                // header("Location: http://localhost/error.php?msg="."Falha ao criar usuário");
+            }
         }
-    }
     }
     
     ?>

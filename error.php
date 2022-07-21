@@ -7,7 +7,7 @@ include("base/header.php");
     if (isset($_GET['msg'])) {
         echo $_GET['msg'];
     } else {
-        echo "LINK NÃO SETADO";
+        echo "ERRO NÃO SETADO";
     }
 ?></p>
 <br>
