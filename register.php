@@ -1,6 +1,5 @@
 <?php
     $title="Register";
-    require("model/database.php");
     // require("model/userAuth.php");
     include_once("./view/base/top.php"); 
 
