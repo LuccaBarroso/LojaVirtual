@@ -7,9 +7,11 @@
     $senha_error = $email_error = "";
     if(isset($_POST["email"])){
         $email = htmlspecialchars($_POST["email"]);
+        echo $email;
     }
     if(isset($_POST["senha"])){
         $senha = htmlspecialchars($_POST["senha"]);
+        echo $senha;
     }
     
     
@@ -87,7 +89,7 @@
                 echo "<p class='alert alert-warning'>". $senha_error ."</p>";
             }
         ?>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">Logar</button>
     </form> 
     </div>
 <?php

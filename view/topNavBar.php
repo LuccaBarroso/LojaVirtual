@@ -34,11 +34,12 @@
             aria-label="Search"
             aria-describedby="search-addon"
         />
-            <span class="input-group-text border-0" id="search-addon">
+            <span class="input-group-text border-0 ml-2" id="search-addon">
                 <i class="fas bi-search"></i>
             </span>
         </form>
         </div>
     </div>
   </div>
+  <a href="./logout.php"><button type="button" class="btn btn-outline-primary"><i class="bi-box-arrow-right"></i></button></a>
 </nav>
