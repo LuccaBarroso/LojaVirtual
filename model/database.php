@@ -1,5 +1,5 @@
 <?php
-    define('DB_SERVER', 'localhost');
+    $DB_SERVER = "localhost";
     define('DB_USERNAME', 'root');
     define('DB_PASSWORD', 'mynewpassword');
     define('DB_NAME', 'LojaVirtual');
@@ -9,6 +9,7 @@
      
     // se não conectar retorna um erro
     if($db === false){
+        header('http://localhost/');
         $error_msg = ("ERROR: Could not connect. " . mysqli_connect_error());
         include("view/error.php");
         exit();

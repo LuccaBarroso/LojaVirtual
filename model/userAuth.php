@@ -1,7 +1,7 @@
 <?php
- function getUsers(){
-    global $db;
-    $result = $db->query('SELECT username from users');
+ include_once("database.php");
+ function getUsers($db){
+    $result = mysqli_query($db, 'SELECT username from users');
     if (!$result) {
         die('Invalid query: ');
     }
@@ -10,4 +10,5 @@
     }
     return $result;
  }
+ getUsers($db)
 ?>
