@@ -1,12 +1,11 @@
 <?php
     require("model/database.php");
     // require("model/userAuth.php");
-    ?>
-
-<?php @include "./view/base/top.php" ?>
-
+    include_once("./view/base/top.php") 
+?>
+    <p>Pagina principal</p>
 <?php
-    @include "./view/base/bottom.php";
+    include_once("./view/base/bottom.php");
 ?>
 
  

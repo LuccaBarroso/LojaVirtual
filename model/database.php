@@ -2,10 +2,10 @@
     $DB_SERVER = "localhost";
     $DB_USERNAME = "root";
     $DB_PASSWORD="mynewpassword";
-    $DB_NAME= "LojaVirtal";
+    $DB_NAME= "LojaVirtual";
      
     //tenta conectar com banco
-    $db = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    $db = mysqli_connect($DB_SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
      
     // se não conectar retorna um erro
     if($db === false){

@@ -1,6 +1,3 @@
-<?php 
-    echo "teste";
-?>
 <nav class="py-4 bg-light border-bottom">
     <div class="container d-flex flex-wrap">
         <ul class="nav me-auto">

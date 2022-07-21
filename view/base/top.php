@@ -10,3 +10,4 @@
 </head>
 <body>
     <main class="main">
+        <?php include_once("./view/topNavBar.php")?>
