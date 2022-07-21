@@ -17,13 +17,28 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="./">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./login.php">Login</a>
-        </li>
-        <!-- tirar se ja tiver logado -->
-        <li class="nav-item">
-          <a class="nav-link" href="./register.php">Register</a>
-        </li>
+        <?php
+          session_start();
+          if(isset($_SESSION["logado"]) && $_SESSION["logado"]==true){
+            echo '
+            <a href="./">
+              <button type="button" class="btn btn-default">
+                <i class="bi-cart"></i>
+              </button>
+            </a>
+            ';
+          }else{
+            echo '
+            <li class="nav-item">
+              <a class="nav-link" href="./login.php">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./register.php">Register</a>
+            </li>
+            ';
+          }
+        ?>
+       
       </ul>
       <div class="container-fluid">
         <form class="d-flex input-group w-auto">
@@ -41,5 +56,9 @@
         </div>
     </div>
   </div>
-  <a href="./logout.php"><button type="button" class="btn btn-outline-primary"><i class="bi-box-arrow-right"></i></button></a>
+  <a href="./logout.php">
+    <button type="button" class="btn btn-outline-primary">
+      <i class="bi-box-arrow-right"></i>
+    </button>
+  </a>
 </nav>
