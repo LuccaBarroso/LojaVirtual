@@ -5,9 +5,13 @@
     include_once("./view/base/top.php"); 
 
     $senha_error = $email_error = "";
-    $email = htmlspecialchars($_POST["email"]);
-    $senha = htmlspecialchars($_POST["senha"]);
-
+    if(isset($_POST["email"])){
+        $email = htmlspecialchars($_POST["email"]);
+    }
+    if(isset($_POST["senha"])){
+        $senha = htmlspecialchars($_POST["senha"]);
+    }
+    
     
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($email == ""){

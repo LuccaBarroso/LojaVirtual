@@ -4,7 +4,7 @@
     // require("model/userAuth.php");
     include_once("./view/base/top.php");
     session_start();
-    if($_SESSION["logado"]){
+    if(isset($_SESSION["logado"])){
         echo "<p class='alert alert-primary m-2'>"."Bem vindo ". htmlspecialchars($_SESSION["nome"]) ."!</p>";
     }
 ?>

@@ -5,12 +5,17 @@
     include_once("./view/base/top.php"); 
 
     $senha_error = "";
-    $nome = htmlspecialchars($_POST["nome"]);
-    $email = htmlspecialchars($_POST["email"]);
-    $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
-
+    if(isset($_POST["nome"])){
+        $nome = htmlspecialchars($_POST["nome"]);
+    }
+    if(isset($_POST["email"])){
+        $email = htmlspecialchars($_POST["email"]);
+    }
+    if(isset($_POST["senha"])){
+        $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
+    }
     //checar se senhas são iguais
-    if($_POST["senha"] !== $_POST["confirmarSenha"]){
+    if(isset($_POST["senha"]) && isset($_POST["confirmarSenha"]) && $_POST["senha"] !== $_POST["confirmarSenha"]){
         $senha_error="As senhas precisam ser iguais!";
     }
 
