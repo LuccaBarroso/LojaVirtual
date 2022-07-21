@@ -10,4 +10,11 @@
 </head>
 <body>
     <main class="main">
-        <?php include_once("./view/topNavBar.php")?>
+        <?php 
+            include_once("./view/topNavBar.php");
+            
+            session_start();
+            if(isset($_SESSION["logado"])){
+                echo "<div class='d-flex justify-content-center'><p class='alert alert-success m-2' style='width:400px;'>"."Bem vindo ". htmlspecialchars($_SESSION["nome"]) ."!</p></div>";
+            }
+        ?>
