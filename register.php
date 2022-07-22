@@ -1,7 +1,8 @@
 <?php
     $title="Register";
     // require("model/userAuth.php");
-    include_once("./view/base/top.php"); 
+    include_once("./view/base/top.php");
+    include_once("./view/base/initSection.php");
 
     $senha_error = $email_error = $nome_error = "";
     if(isset($_POST["nome"])){

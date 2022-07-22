@@ -3,6 +3,8 @@
     // require("model/userAuth.php");
     include_once("./view/base/top.php");
     include_once("./banco/produtos.php");
+    include_once("./view/base/initSection.php");
+    
 ?>
 
     <!-- Banner -->

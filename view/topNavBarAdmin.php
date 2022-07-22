@@ -16,22 +16,8 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="./">Home</a>
-    </li>
+        </li>
       </ul>
-      <div class="container-fluid">
-        <form class="d-flex input-group" style="width:60%;">
-        <input
-            type="search"
-            class="form-control rounded"
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="search-addon"
-        />
-            <span class="input-group-text border-0 ml-2" id="search-addon">
-                <i class="fas bi-search"></i>
-            </span>
-        </form>
-        </div>
     </div>
   </div>
 </nav>

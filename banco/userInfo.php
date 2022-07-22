@@ -9,7 +9,6 @@
     }
     function isAdmin(){
         session_start();
-        print_r($_SESSION["admin"]);
         if(isUserLogged() && $_SESSION["admin"]==1){
             return true;
         }else {
