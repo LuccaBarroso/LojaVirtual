@@ -41,7 +41,7 @@
        
       </ul>
       <div class="container-fluid">
-        <form class="d-flex input-group w-auto">
+        <form class="d-flex input-group" style="width:60%;">
         <input
             type="search"
             class="form-control rounded"
