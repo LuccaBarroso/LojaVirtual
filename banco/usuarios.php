@@ -31,4 +31,15 @@
          }
       }
   }
+
+  function getUserById($id_to_change){
+    require("./banco/database.php");
+    $sql = "SELECT id, nome, email, admin FROM usuarios where id=".$id_to_change;
+    $result = mysqli_query($db, $sql);
+    if($result!=null){
+      return mysqli_fetch_assoc($result);
+    }else{
+      return false;
+    }
+  }
 ?>

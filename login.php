@@ -4,6 +4,7 @@
     include_once("./view/base/top.php"); 
     include_once("./view/base/initSection.php");
 
+
     $senha_error = $email_error = "";
     if(isset($_POST["email"])){
         $email = htmlspecialchars($_POST["email"]);
@@ -93,8 +94,8 @@
             if($senha_error != ""){
                 echo "<p class='alert alert-warning'>". $senha_error ."</p>";
             }
-        ?><button type="submit" class="btn btn-primary">Logar</button>
-        
+        ?>
+        <button type="submit" class="btn btn-primary">Logar</button>
     </form> 
     </div>
 <?php

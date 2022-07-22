@@ -4,6 +4,15 @@
      include_once("./view/topNavBarAdmin.php");
      include_once("./banco/userInfo.php");
      redirectIfNotAdmin();
+     if(isset( $_GET['msg'])){
+        echo "
+            <div class='d-flex justify-content-center'>
+                <p class='alert alert-". $_GET['type']." m-2' style='width:400px;'>"
+                    .$_GET['msg'].
+                "!</p>
+            </div>
+        ";
+    }
 ?>
     <div class="col-lg-8 grid-margin stretch-card m-auto">
         <div class="card center pt-2 mt-2">
@@ -41,10 +50,10 @@
                                             }
                                             echo '
                                             <td>
-                                                <a href="./editUser.php" class="btn btn-outline-primary">
+                                                <a href="./editUser.php?id='.$user['id'].'" class="btn btn-outline-primary">
                                                     <p>Editar</p>
                                                 </a>
-                                                <a href="./deleteUser.php" class="btn btn-danger">
+                                                <a href="./deleteUser.php?id='.$user['id'].'" class="btn btn-danger">
                                                     <p>Deletar</p>
                                                 </a>
                                             </td>
