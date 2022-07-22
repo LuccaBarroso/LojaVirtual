@@ -8,30 +8,34 @@
      redirectIfNotAdmin();
 
      
+     
      if($_SERVER["REQUEST_METHOD"] == "POST"){
-          $sql = "Delete from usuarios where id=".$_POST["id"];
-          if(mysqli_query($db, $sql)){
-               header("Location: http://localhost/adminMain.php?msg=Usuario Deletado com Sucesso&type=success");
-          }else{
-               header("Location: http://localhost/adminMain.php?msg="."Falha ao Deletar Usuario"."&type=danger");
-          }
+        updateUser($_POST);
      }
+     
+     
      $user = getUserById($_GET["id"]);
-     print_r($user);
-
 ?>
 
     <div class="card center pt-2 mt-5 mx-auto" style="width: 500px;">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="card-body">
-            <input type="hidden" name="id" value=<?php echo $_GET['id'] ?>>
-            <h4 class="card-title">Deletando Usuário</h4>
-            <p class="card-description">
-                Tem certeza que quer deletar o usuário de id
-                <?php
-                    echo $_GET['id'];
-                ?>?
-            </p>
-            <button type="submit" class="btn btn-danger">Deletar</button>
+            <input type="hidden" name="id" value=<?php echo $user["id"] ?>>
+            <h4 class="card-title">Editando Usuário</h4>
+            <div class="form-group">
+               <label for="email">Nome:</label>
+               <input type="nome" class="form-control" name="nome" value="<?php echo $user["nome"] ?>">
+            </div>
+            <div class="form-group">
+               <label for="email">Email:</label>
+               <input type="email" class="form-control" name="email" value=<?php echo $user["email"] ?>>
+            </div>
+            <div class="form-group">
+               <input class="form-check-input ml-3" name="admin" type="checkbox" <?php if($user["admin"] == 1){ echo "checked"; }?>>
+               <label class="form-check-label ml-5" for="flexCheckDefault">
+               Admin
+               </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Editar</button>
         </form>
     </div>
 

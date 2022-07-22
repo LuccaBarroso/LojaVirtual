@@ -18,12 +18,7 @@
          if(mysqli_num_rows($result) > 0){
           $users = array();
           while($UsuarioAtual = mysqli_fetch_array($result)){
-            array_push($users, array(
-              "id" => $UsuarioAtual["id"],
-              "nome" => $UsuarioAtual["nome"],
-              "email" => $UsuarioAtual["email"],
-              "admin" => $UsuarioAtual["admin"]
-            ));
+            array_push($users, $UsuarioAtual);
           }
           return $users;
          }else{
@@ -32,14 +27,41 @@
       }
   }
 
-  function getUserById($id_to_change){
+  function getUserById($id){
     require("./banco/database.php");
-    $sql = "SELECT id, nome, email, admin FROM usuarios where id=".$id_to_change;
+    $sql = "SELECT id, nome, email, admin FROM usuarios where id=".$id;
     $result = mysqli_query($db, $sql);
     if($result!=null){
       return mysqli_fetch_assoc($result);
     }else{
       return false;
     }
+  }
+
+  function updateUser($post){
+    $id = $post["id"];
+    $nome = $post["nome"];
+    $email = $post["email"];
+    if($post["admin"] == "on"){
+      $admin = 1;
+    }else{
+      $admin = 0;
+    }
+
+    require("./banco/database.php");
+
+    $sql = "UPDATE usuarios SET 
+      nome='".$nome."',
+      email='".$email."',
+      admin='".$admin."'
+      WHERE id=".$id;
+
+    if (mysqli_query($db, $sql)) {
+      header("Location: http://localhost/adminMain.php?msg=Usuario Atualizado com Sucesso&type=success");
+    }else{
+      header("Location: http://localhost/adminMain.php?msg=Falha ao Atualizar o Usuário&type=danger");
+    }
+    
+    return $post["email"];
   }
 ?>

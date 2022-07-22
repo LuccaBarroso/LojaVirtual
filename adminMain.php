@@ -50,10 +50,10 @@
                                             }
                                             echo '
                                             <td>
-                                                <a href="./editUser.php?id='.$user['id'].'" class="btn btn-outline-primary">
+                                                <a href="./editUser.php?id='.$user['id'].'" class="btn btn-outline-primary" style="height:40px;">
                                                     <p>Editar</p>
                                                 </a>
-                                                <a href="./deleteUser.php?id='.$user['id'].'" class="btn btn-danger">
+                                                <a href="./deleteUser.php?id='.$user['id'].'" class="btn btn-danger " style="height:40px;">
                                                     <p>Deletar</p>
                                                 </a>
                                             </td>
