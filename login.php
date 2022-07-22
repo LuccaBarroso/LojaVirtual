@@ -6,11 +6,9 @@
     $senha_error = $email_error = "";
     if(isset($_POST["email"])){
         $email = htmlspecialchars($_POST["email"]);
-        echo $email;
     }
     if(isset($_POST["senha"])){
         $senha = htmlspecialchars($_POST["senha"]);
-        echo $senha;
     }
 
     if (isset($_GET['success']) && $_GET['success']) {

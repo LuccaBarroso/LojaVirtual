@@ -57,9 +57,15 @@
     </div>
   </div>
   <!-- TODO só mostrar se tiver deslogado -->
-  <a href="./logout.php">
-    <button type="button" class="btn btn-outline-primary">
-      <i class="bi-box-arrow-right"></i>
-    </button>
-  </a>
+  <?php
+    if(isset($_SESSION["logado"]) && $_SESSION["logado"]==true){
+      echo '
+        <a href="./logout.php">
+          <button type="button" class="btn btn-outline-primary">
+            <i class="bi-box-arrow-right"></i>
+          </button>
+        </a>
+      ';
+    }
+  ?>
 </nav>
