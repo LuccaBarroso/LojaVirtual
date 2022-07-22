@@ -56,6 +56,7 @@
         </div>
     </div>
   </div>
+  <!-- TODO só mostrar se tiver deslogado -->
   <a href="./logout.php">
     <button type="button" class="btn btn-outline-primary">
       <i class="bi-box-arrow-right"></i>

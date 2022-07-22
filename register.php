@@ -27,6 +27,8 @@
         $senha_error="As senhas precisam ser iguais!";
     }
 
+    //TODO validar se o email já não esta cadastrado
+
     if($senha_error == "" && $email_error == "" && $nome_error == ""){
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
