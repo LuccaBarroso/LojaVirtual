@@ -12,9 +12,10 @@
     <main class="main">
         <?php 
             require_once("banco/database.php");
+            require_once("banco/userInfo.php");
             include_once("./view/topNavBar.php");
-            if(isset($_SESSION["logado"]) && $_SESSION["logado"]==true){
-                if(isset($_SESSION["admin"]) && $_SESSION["admin"]=true){
+            if(isUserLogged()){
+                if(isAdmin()){
                     echo "
                     <div class='d-flex justify-content-center'>
                         <p class='alert alert-success m-2' style='width:400px;'>"

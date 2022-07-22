@@ -7,4 +7,5 @@
 	`data_criado` DATETIME NOT NULL COMMENT 'CURRENT_TIMESTAMP',
 	`admin` BOOLEAN COMMENT 'false',
   primary key(id)
-); -->
+); 
+-->

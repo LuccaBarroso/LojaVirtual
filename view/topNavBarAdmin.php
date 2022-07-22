@@ -16,29 +16,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="./">Home</a>
-        </li>
-        <?php
-          session_start();
-          if(isset($_SESSION["logado"]) && $_SESSION["logado"]==true){
-            echo '
-            <a href="./">
-              <button type="button" class="btn btn-default">
-                <i class="bi-cart"></i>
-              </button>
-            </a>
-            ';
-          }else{
-            echo '
-            <li class="nav-item">
-              <a class="nav-link" href="./login.php">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./register.php">Register</a>
-            </li>
-            ';
-          }
-        ?>
-       
+    </li>
       </ul>
       <div class="container-fluid">
         <form class="d-flex input-group" style="width:60%;">
@@ -56,15 +34,4 @@
         </div>
     </div>
   </div>
-  <?php
-    if(isset($_SESSION["logado"]) && $_SESSION["logado"]==true){
-      echo '
-        <a href="./logout.php">
-          <button type="button" class="btn btn-outline-primary">
-            <i class="bi-box-arrow-right"></i>
-          </button>
-        </a>
-      ';
-    }
-  ?>
 </nav>

@@ -25,7 +25,7 @@
         }
         if($senha_error == "" && $email_error == ""){
          //checar se o usuario existe
-            $sql = "SELECT id, nome, senha, 'admin' FROM usuarios WHERE email = ?";
+            $sql = "SELECT id, nome, senha, admin FROM usuarios WHERE email = ?";
             
             if($stmt = mysqli_prepare($db, $sql)){
                 mysqli_stmt_bind_param($stmt, "s", $param_email);
@@ -49,7 +49,10 @@
                                 $_SESSION["logado"] = true;
                                 $_SESSION["id"] = $id;
                                 $_SESSION["nome"] = $nome;
-                                $_SESSION["admin"] = $admin;
+                                print_r($admin);
+                                // if($admin){
+                                    $_SESSION["admin"] = $admin;
+                                // }
 
                                 header("Location: http://localhost");
 
