@@ -93,8 +93,8 @@
             if($senha_error != ""){
                 echo "<p class='alert alert-warning'>". $senha_error ."</p>";
             }
-        ?>
-        <button type="submit" class="btn btn-primary">Logar</button>
+        ?><button type="submit" class="btn btn-primary">Logar</button>
+        
     </form> 
     </div>
 <?php

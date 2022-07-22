@@ -15,6 +15,11 @@
             return false;
         }
     }
+    function redirectIfNotAdmin(){
+        if(!isAdmin()){
+            header("Location: http://localhost");
+        }
+    }
 
 
 ?>
