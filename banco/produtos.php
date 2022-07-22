@@ -9,7 +9,6 @@
   );
 -->
 <?php 
-  //retorna 20 produtos
   function getProducts(){
     require("./banco/database.php");
      $sql = "SELECT * FROM produtos order by id";

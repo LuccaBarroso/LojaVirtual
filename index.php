@@ -17,12 +17,12 @@
                         <div class="card p-1 m-2">
                             <img src="https://via.placeholder.com/250"
                             class="card-img-top" alt="placeholder" />
-                            <div class="text-center">
+                            <div class="text-center d-flex flex-column justify-content-center align-items-center pt-2">
                                 <h5 class="card-title">'.$product["nome"].'</h5>
-                                <p class="text-muted mb-4">'.$product["descricao"].'</p>
+                                <p class="mb-4 w-75">'.$product["descricao"].'</p>
                             </div>
                             <div class="d-flex justify-content-around font-weight-bold mt-4">
-                                <span class="pt-1">$'.number_format($product["preco"], 2, ',', '.').'</span><span><a href="./" class="btn btn-success">Adicionar</a></span>
+                                <span class="pt-1">$'.number_format($product["preco"], 2, ',', '.').'</span><span><a href="./" class="btn btn-success mb-2">Adicionar</a></span>
                             </div>
                         </div>
                         ';
