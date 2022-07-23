@@ -98,33 +98,26 @@
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Email</th>
-                        <th>Admin</th>
+                        <th>Preço</th>
                         <th>Modificar</th>
                     </tr>
                     </thead>
                     <tbody>
                         <?php
-                            @require_once("./banco/userAuth.php");
-                            $users = getUsuarios();
-                            if($users){
-                                foreach ($users as $user){
+                            @require_once("./banco/produtos.php");
+                            $products = getProducts();
+                            if($products){
+                                foreach ($products as $product){
                                     echo '
                                         <tr>
-                                            <td>'.$user['id'].'</td>
-                                            <td>'.$user['nome'].'</td>
-                                            <td>'.$user['email'].'</td>';
-                                            if($user['admin']==1){
-                                                echo "<td>Sim</td>";
-                                            }else{
-                                                echo "<td>Não</td>";
-                                            }
-                                            echo '
+                                            <td>'.$product['id'].'</td>
+                                            <td>'.$product['nome'].'</td>
+                                            <td>'.$product['preco'].'</td>
                                             <td>
-                                                <a href="./updateUser.php?id='.$user['id'].'" class="btn btn-outline-primary" style="height:40px;">
+                                                <a href="./updateProduct.php?id='.$product['id'].'" class="btn btn-outline-primary" style="height:40px;">
                                                     <p>Editar</p>
                                                 </a>
-                                                <a href="./deleteUser.php?id='.$user['id'].'" class="btn btn-danger " style="height:40px;">
+                                                <a href="./deleteProduct.php?id='.$product['id'].'" class="btn btn-danger " style="height:40px;">
                                                     <p>Deletar</p>
                                                 </a>
                                             </td>
@@ -134,7 +127,7 @@
                             }else{
                                 echo '
                                     <div>
-                                        Nenhum usuario encontrado.
+                                        Nenhum Produto encontrado.
                                     </div>
                                 ';
                             }

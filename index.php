@@ -17,8 +17,8 @@
                     foreach($products as $product){
                         echo '
                         <div class="card p-1 m-2">
-                            <img src="https://via.placeholder.com/250"
-                            class="card-img-top" alt="placeholder" />
+                            <img src="'.$product["imagem"].'"
+                            class="card-img-top" alt="placeholder" style="width: 250px;"/>
                             <div class="text-center d-flex flex-column justify-content-center align-items-center pt-2" style="height:100px;">
                                 <h5 class="card-title">'.$product["nome"].'</h5>
                                 <p class="mb-4 w-75">'.$product["descricao"].'</p>
