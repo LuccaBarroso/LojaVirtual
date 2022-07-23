@@ -31,6 +31,7 @@
         }
     }
   }
+  
   function createNewProduct($data){
     return $data;
   }

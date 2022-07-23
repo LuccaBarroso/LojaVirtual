@@ -35,7 +35,7 @@
                     </thead>
                     <tbody>
                         <?php
-                            @require_once("./banco/usuarios.php");
+                            @require_once("./banco/userAuth.php");
                             $users = getUsuarios();
                             if($users){
                                 foreach ($users as $user){
@@ -51,7 +51,7 @@
                                             }
                                             echo '
                                             <td>
-                                                <a href="./editUser.php?id='.$user['id'].'" class="btn btn-outline-primary" style="height:40px;">
+                                                <a href="./updateUser.php?id='.$user['id'].'" class="btn btn-outline-primary" style="height:40px;">
                                                     <p>Editar</p>
                                                 </a>
                                                 <a href="./deleteUser.php?id='.$user['id'].'" class="btn btn-danger " style="height:40px;">
@@ -105,7 +105,7 @@
                     </thead>
                     <tbody>
                         <?php
-                            @require_once("./banco/usuarios.php");
+                            @require_once("./banco/userAuth.php");
                             $users = getUsuarios();
                             if($users){
                                 foreach ($users as $user){
@@ -121,7 +121,7 @@
                                             }
                                             echo '
                                             <td>
-                                                <a href="./editUser.php?id='.$user['id'].'" class="btn btn-outline-primary" style="height:40px;">
+                                                <a href="./updateUser.php?id='.$user['id'].'" class="btn btn-outline-primary" style="height:40px;">
                                                     <p>Editar</p>
                                                 </a>
                                                 <a href="./deleteUser.php?id='.$user['id'].'" class="btn btn-danger " style="height:40px;">

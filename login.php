@@ -1,6 +1,5 @@
 <?php
     $title="Login";
-    // require("model/userAuth.php");
     include_once("./view/base/top.php"); 
     include_once("./view/base/initSection.php");
     include_once("./banco/userAuth.php");
@@ -31,10 +30,19 @@
         if($senha_error == "" && $email_error == ""){
             $senha_error = login($email, $senha);
         }
+    } 
+    if (isset($_GET['success'])) {
+        echo "
+        <div class='d-flex justify-content-center'>
+            <p class='alert alert-success m-2' style='width:400px;'>
+                Registrado com sucesso!  
+            </p>
+        </div>";
     }
     
-    ?>
-<br>
+?>
+
+    <br>
     <div class="card lg m-auto p-3" style="width: 500px;">
     <p class="center">Fazer login</p>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

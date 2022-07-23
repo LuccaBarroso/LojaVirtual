@@ -3,56 +3,49 @@
     // require("model/userAuth.php");
     include_once("./view/base/top.php");
     include_once("./view/base/initSection.php");
+    include_once("./banco/userAuth.php");
 
     $senha_error = $email_error = $nome_error = "";
-    if(isset($_POST["nome"])){
-        $nome = htmlspecialchars($_POST["nome"]);
+    $nome = $email = $senha = $confirmarSenha = "";
+    
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if(isset($_POST["nome"])){
+            $nome = htmlspecialchars($_POST["nome"]);
+        }
         if($nome == ""){
             $nome_error = "É necessário que o usuário tenha um nome!";
         }
-    }
-    if(isset($_POST["email"])){
-        $email = htmlspecialchars($_POST["email"]);
+
+        if(isset($_POST["email"])){
+            $email = htmlspecialchars($_POST["email"]);
+        }
         if($email == ""){
             $email_error = "É necessário que o usuário tenha um email!";
         }
-    }
-    if(isset($_POST["senha"])){
-        $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
-        if($_POST["senha"] == ""){
+
+        if(isset($_POST["senha"])){
+            $senha = $_POST["senha"];
+        }
+        if($senha == ""){
             $senha_error = "É necessário que o usuário tenha uma senha!";
         }
-    }
-    //checar se senhas são iguais
-    if(isset($_POST["senha"]) && isset($_POST["confirmarSenha"]) && $_POST["senha"] !== $_POST["confirmarSenha"]){
-        $senha_error="As senhas precisam ser iguais!";
-    }
 
-    //TODO validar se o email já não esta cadastrado
+        if(isset($_POST["confirmarSenha"])){
+            $confirmarSenha = $_POST["senha"];
+        }
+        if($_POST["confirmarSenha"] == ""){
+            $senha_error = "É necessário que o usuário tenha uma senha!";
+        }
+        
+        if($senha != $confirmarSenha){
+            $senha_error = "Senhas precisam ser iguais!";
+        }
 
-    if($senha_error == "" && $email_error == "" && $nome_error == ""){
-
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            //somente quando for post
-            $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
-            $stmt = mysqli_prepare($db, $sql);
-            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_email, $param_senha);
-                
-            // Set parameters
-            $param_name = $nome;
-            $param_email = $email;
-            $param_senha = $senha; // Creates a password hash
-            
-            //tenta executar
-            if(mysqli_stmt_execute($stmt)){
-                // deu certo, vai pra login
-                header("location: http://localhost/login.php?success=true");
-            }else{
-                // header("Location: http://localhost/error.php?msg="."Falha ao criar usuário");
-            }
+        if($senha_error == "" && $email_error == "" && $nome_error == ""){
+            $senha = password_hash($senha, PASSWORD_DEFAULT);
+            $senha_error = register($nome, $email, $senha);
         }
     }
-    
     ?>
 <br>
     <div class="card lg m-auto p-3" style="width: 500px;">

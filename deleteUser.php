@@ -7,12 +7,7 @@
      redirectIfNotAdmin();
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $sql = "Delete from usuarios where id=".$_POST["id"];
-        if(mysqli_query($db, $sql)){
-            header("Location: http://localhost/adminMain.php?msg=Usuario Deletado com Sucesso&type=success");
-        }else{
-            header("Location: http://localhost/adminMain.php?msg="."Falha ao Deletar Usuario"."&type=danger");
-        }
+        deleteUser($_POST["id"]);
     }
 
 ?>
