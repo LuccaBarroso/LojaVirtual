@@ -2,7 +2,7 @@
      $title="Admin";
      include_once("./view/base/top.php");
      include_once("./view/topNavBarAdmin.php");
-     include_once("./banco/userInfo.php");
+     include_once("./banco/userAuth.php");
      include_once("./banco/database.php");
      redirectIfNotAdmin();
 

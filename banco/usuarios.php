@@ -12,19 +12,19 @@
 <?php 
   function getUsuarios(){
     require("./banco/database.php");
-     $sql = "SELECT id, nome, email, admin FROM usuarios order by id";
-     $result = mysqli_query($db, $sql);
-     if($result!=null){
-         if(mysqli_num_rows($result) > 0){
-          $users = array();
-          while($UsuarioAtual = mysqli_fetch_array($result)){
-            array_push($users, $UsuarioAtual);
-          }
-          return $users;
-         }else{
-          return false;
-         }
-      }
+    $sql = "SELECT id, nome, email, admin FROM usuarios order by id";
+    $result = mysqli_query($db, $sql);
+    if($result!=null){
+        if(mysqli_num_rows($result) > 0){
+        $users = array();
+        while($UsuarioAtual = mysqli_fetch_array($result)){
+          array_push($users, $UsuarioAtual);
+        }
+        return $users;
+        }else{
+        return false;
+        }
+    }
   }
 
   function getUserById($id){

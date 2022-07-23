@@ -1,6 +1,6 @@
 <?php
      include_once("./view/topNavBar.php");
-     include_once("./banco/userInfo.php");
+     include_once("./banco/userAuth.php");
      if(isUserLogged()){
          if(isAdmin()){
              echo "
