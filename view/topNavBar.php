@@ -1,70 +1,52 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+
+<?php
+  require("./banco/userAuth.php");
+?>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container">
     <a class="navbar-brand" href="./">LojaVirtual</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-mdb-toggle="collapse"
-      data-mdb-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="fas fa-bars"></i>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="./">Home</a>
-        </li>
-        <?php
-          session_start();
-          if(isset($_SESSION["logado"]) && $_SESSION["logado"]==true){
-            echo '
-            <a href="./">
-              <button type="button" class="btn btn-default">
-                <i class="bi-cart"></i>
-              </button>
-            </a>
-            ';
-          }else{
-            echo '
-            <li class="nav-item">
-              <a class="nav-link" href="./login.php">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./register.php">Register</a>
-            </li>
-            ';
-          }
-        ?>
-       
-      </ul>
-      <div class="container-fluid">
-        <form class="d-flex input-group" style="width:60%;">
-        <input
-            type="search"
-            class="form-control rounded"
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="search-addon"
-        />
-            <span class="input-group-text border-0 ml-2" id="search-addon">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+          <a class="nav-item nav-link " href="./" data-toggle="tooltip" data-placement="bottom" title="Início">
+            <i class="bi-house-fill"></i>
+          </a>
+          <?php
+            if(isUserLogged()){
+              echo'
+                <a class="nav-item nav-link " href="./logout.php" data-toggle="tooltip" data-placement="bottom" title="Deslogar">
+                  <i class=" bi-box-arrow-left"></i>
+                </a>
+                <a class="nav-item nav-link " href="./profile.php" data-toggle="tooltip" data-placement="bottom" title="Perfil">
+                  <i class=" bi-person-fill"></i>
+                </a>
+                
+                ';
+              }else{
+                echo'
+                  <a class="nav-item nav-link " href="./login.php" data-toggle="tooltip" data-placement="bottom" title="Logar">
+                    <i class=" bi-box-arrow-in-left"></i>
+                  </a>
+                ';
+              }
+              ?>
+          <a class="nav-item nav-link " href="./cart.php" data-toggle="tooltip" data-placement="bottom" title="Carrinho">
+            <i class=" bi-cart-fill"></i>
+          </a>
+      </div>
+          <form class="d-flex input-group" method="POST" action="./search.php">
+            <input
+                type="text"
+                class="form-control rounded"
+                placeholder="Search"
+                name="search"
+            />
+            <button class="input-group-text border-0 ml-2" id="search-addon">
                 <i class="fas bi-search"></i>
-            </span>
-        </form>
-        </div>
+            </button>
+          </form>
     </div>
-  </div>
-  <?php
-    if(isset($_SESSION["logado"]) && $_SESSION["logado"]==true){
-      echo '
-        <a href="./logout.php">
-          <button type="button" class="btn btn-outline-primary">
-            <i class="bi-box-arrow-right"></i>
-          </button>
-        </a>
-      ';
-    }
-  ?>
+    </div>
 </nav>

@@ -93,11 +93,29 @@
       header("Location: http://localhost/adminMain.php?msg=Falha ao Atualizar o prodduto&type=danger");
     }
   }
+
   function viewProduct($id){
     require("./banco/database.php");
     $sql = "UPDATE produtos SET view=view+1 WHERE id=".$id;
     if (mysqli_query($db, $sql)) {
      return true; 
+    }
+  }
+
+  function getMostViewedProducts(){
+    require("./banco/database.php");
+    $sql = "SELECT * FROM produtos order by view desc limit 8";
+    $result = mysqli_query($db, $sql);
+    if($result!=null){
+        if(mysqli_num_rows($result) > 0){
+        $produtos = array();
+        while($produtoAtual = mysqli_fetch_array($result)){
+          array_push($produtos, $produtoAtual);
+        }
+        return $produtos;
+        }else{
+        return false;
+        }
     }
   }
 ?>

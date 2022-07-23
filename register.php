@@ -48,7 +48,7 @@
     }
     ?>
 <br>
-    <div class="card lg m-auto p-3" style="width: 500px;">
+    <div class="container card lg m-auto p-3">
     <p class="center">Registrar um novo usuário</p>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div class="form-group">
@@ -82,7 +82,10 @@
                 echo "<p class='alert alert-warning'>". $senha_error ."</p>";
             }
         ?>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="text-center">
+            <a href="./login.php" class="d-block pb-1">Já tenho conta, quero me logar</a>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
     </form> 
     </div>
 <?php
