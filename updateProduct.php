@@ -97,7 +97,7 @@
                }
             ?>
             <div class="form-group">
-               <label for="preco">Imagem:</label>
+               <label for="imagem">Imagem:</label>
                <input type="file" class="btn" name="imagem">
             </div>
             <?php

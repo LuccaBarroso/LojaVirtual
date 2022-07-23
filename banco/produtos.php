@@ -5,6 +5,7 @@
     `descricao` VARCHAR(255) NOT NULL,
     `preco` DECIMAL(10,2) NOT NULL,
     `imagem` VARCHAR(255) NOT NULL,
+     `view` INT NOT NULL DEFAULT 0,
     primary key(id)
   );
 -->
@@ -17,13 +18,7 @@
         if(mysqli_num_rows($result) > 0){
         $produtos = array();
         while($produtoAtual = mysqli_fetch_array($result)){
-          array_push($produtos, array(
-            "id" => $produtoAtual["id"],
-            "nome" => $produtoAtual["nome"],
-            "descricao" => $produtoAtual["descricao"],
-            "preco" => $produtoAtual["preco"],
-            "imagem" => $produtoAtual["imagem"]
-          ));
+          array_push($produtos, $produtoAtual);
         }
         return $produtos;
         }else{
@@ -96,6 +91,13 @@
      return true; 
     }else{
       header("Location: http://localhost/adminMain.php?msg=Falha ao Atualizar o prodduto&type=danger");
+    }
+  }
+  function viewProduct($id){
+    require("./banco/database.php");
+    $sql = "UPDATE produtos SET view=view+1 WHERE id=".$id;
+    if (mysqli_query($db, $sql)) {
+     return true; 
     }
   }
 ?>
