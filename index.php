@@ -17,12 +17,12 @@
                     foreach($products as $product){
                         echo '
                         <div class="card p-1 m-2">
-                            <a href="./product.php?id='.$product["id"].'" class="text-decoration-none text-dark">
+                            <a href="./product.php?id='.$product["id"].'" class="text-dark">
                             <img src="'.$product["imagem"].'"
                             class="card-img-top" alt="placeholder" style="width: 250px;"/>
-                            <div class="text-center d-flex flex-column justify-content-center align-items-center pt-2" style="height:100px;">
-                                <h5 class="card-title">'.$product["nome"].'</h5>
-                                <p class="mb-4 w-75">'.$product["descricao"].'</p>
+                            <div class="d-flex">
+                                <h5 class="card-title mr-auto ml-2">'.$product["nome"].'</h5>
+                                <p class="mr-1">'.$product["view"].'<i class="bi-eye pl-1"></i></p>
                             </div>
                             </a>
                             <div class="d-flex justify-content-around font-weight-bold mt-4">

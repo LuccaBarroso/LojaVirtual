@@ -13,8 +13,11 @@
         <img src="<?php echo $product["imagem"] ?>"
         class="card-img-top" alt="placeholder" style="width: 460px;"/>
         <div class="text-center d-flex flex-column justify-content-center align-items-center pt-2" style="height:100px;">
-            <h5 class="card-title"><?php echo $product["nome"] ?></h5>
-            <p class="mb-4 w-75"><?php echo $product["descricao"] ?></p>
+        <div class="mb-1">
+          <h5 class="card-title d-inline"><?php echo $product["nome"] ?></h5>
+          <p class="mr-1 d-inline"><?php echo $product["view"] ?><i class="bi-eye pl-1"></i></p>
+        </div>
+            <p><?php echo $product["descricao"] ?></p>
         </div>
         <div class="d-flex justify-content-around font-weight-bold mt-4">
             <span class="pt-1">$<?php echo number_format($product["preco"], 2, ',', '.')?></span>
