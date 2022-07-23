@@ -55,11 +55,47 @@
 
   function deleteProduct($id){
     require("./banco/database.php");
+    $imgPath = getProductById($id)["imagem"];
     $sql = "DELETE FROM produtos WHERE id=".$id;
     if(mysqli_query($db, $sql)){
+      unlink($imgPath);
       header("Location: http://localhost/adminMain.php?msg=Produto Deletado com Sucesso&type=success");
     }else{
       header("Location: http://localhost/adminMain.php?msg=Falha ao deletar o produto&type=danger");
+    }
+  }
+
+  function getProductById($id){
+    require("./banco/database.php");
+    $sql = "SELECT * FROM produtos where id=".$id;
+    $result = mysqli_query($db, $sql);
+    if($result!=null){
+      return mysqli_fetch_assoc($result);
+    }else{
+      return false;
+    }
+  }
+
+  function updateProduct($id, $nome, $descricao, $preco, $imagem=false){
+    require("./banco/database.php");
+    $oldPath = getProductById($id)["imagem"];
+    if($imagem == false){
+      $imagem = $oldPath;
+    }else{
+      unlink($oldPath);
+    }
+
+    $sql = "UPDATE produtos SET 
+      nome='".$nome."',
+      descricao='".$descricao."',
+      preco='".$preco."',
+      imagem='".$imagem."'
+      WHERE id=".$id;
+
+    if (mysqli_query($db, $sql)) {
+     return true; 
+    }else{
+      header("Location: http://localhost/adminMain.php?msg=Falha ao Atualizar o prodduto&type=danger");
     }
   }
 ?>

@@ -12,6 +12,16 @@
     
   }
   
+  function getUserById($id){
+    require("./banco/database.php");
+    $sql = "SELECT id, nome, email, admin FROM usuarios where id=".$id;
+    $result = mysqli_query($db, $sql);
+    if($result!=null){
+      return mysqli_fetch_assoc($result);
+    }else{
+      return false;
+    }
+  }
   
   function isUserLogged(){
     if (session_status() === PHP_SESSION_NONE) {
@@ -105,16 +115,6 @@
     }
   }
 
-  function getUserById($id){
-    require("./banco/database.php");
-    $sql = "SELECT id, nome, email, admin FROM usuarios where id=".$id;
-    $result = mysqli_query($db, $sql);
-    if($result!=null){
-      return mysqli_fetch_assoc($result);
-    }else{
-      return false;
-    }
-  }
 
   function updateUser($id, $nome, $email, $admin){
     require("./banco/database.php");
