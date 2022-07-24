@@ -7,7 +7,7 @@
   include_once("./banco/database.php");
   redirectIfNotAdmin();
 
-  $nome_error = $descricao_error = $preco_error = $imagem_error  = "";
+  $nome_error = $descricao_error = $preco_error = $imagem_error = $inicio_error = $final_error = $desconto_error = "";
      
      
   if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -34,31 +34,58 @@
         $preco = htmlspecialchars($_POST["preco"]);
     }
     if($preco == ""){
-        $preco_error = "É necessário que o produto tenha um preco!";
-    }
+       $preco_error = "É necessário que o produto tenha um preco!";
+   }
 
+   if(isset($_POST["inicio"])){
+         $inicio = htmlspecialchars($_POST["inicio"]);
+   }
+   if(isset($_POST["final"])){
+         $final = htmlspecialchars($_POST["final"]);
+   }
+   if(isset($_POST["desconto"])){
+         $desconto = htmlspecialchars($_POST["desconto"]);
+   }
+      
     if($preco_error == "" && $descricao_error == "" && $nome_error == ""){
-        if(!empty($_FILES["imagem"]["name"])) {
-          $fileName = $_FILES["imagem"]["name"];
-          $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-          $path = "./uploads/produtos/".$nome.rand().".".$fileType;
-          
-          if(in_array($fileType, array('jpg','png','jpeg'))){
-              if(updateProduct($id, $nome, $descricao, $preco, $path)){
-                move_uploaded_file($_FILES["imagem"]["tmp_name"], $path);
-                header("Location: http://localhost/adminMain.php?msg=Produto Criado com Sucesso&type=success");
-              }
-          }else{ 
-              $imagem_error = 'Só são permitidos os formatos JPG, JPEG e PNG.'; 
-              }
-        }else{
-          if(updateProduct($id, $nome, $descricao, $preco)){
-            header("Location: http://localhost/adminMain.php?msg=Produto Atualizado com Sucesso&type=success");
-          }
-        }
-    }
-  }
-  if(isset($_GET["id"])){
+      $result = "";
+      $hasImg = false;
+      $path = "";
+      
+      if(!empty($_FILES["imagem"]["name"])) {
+         $fileName = $_FILES["imagem"]["name"];
+         $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+         $path = "./uploads/produtos/".$nome.rand().".".$fileType;
+         
+         if(!in_array($fileType, array('jpg','png','jpeg'))){
+            $path = false;
+         }
+      }
+
+      if($inicio == "" && $final == "" && $desconto == ""){
+         $result = updateProduct($id, $nome, $descricao, $preco, $path);
+      }else{
+         if($inicio == ""){
+            $inicio_error = "É necessário que o produto tenha uma data de início de desconto ou não tenha nenhuma informação de desconto!";
+         }else if($final == ""){
+            $final_error = "É necessário que o produto tenha uma data de final de desconto ou não tenha nenhuma informação de desconto!";
+         }else if($desconto == ""){
+            $desconto_error = "É necessário que o produto tenha uma porcentagem de desconto ou não tenha nenhuma informação de desconto!";
+         }else if($desconto < 0 || $desconto > 100){
+               $desconto_error = "É necessário que o produto tenha uma porcentagem de desconto entre 0 e 100 ou não tenha nenhuma informação de desconto!";
+         }else{
+            $result = updateProduct($id, $nome, $descricao, $preco, $path, $inicio, $final, $desconto);
+         }
+      }
+   if($result && $hasImg){
+      move_uploaded_file($_FILES["imagem"]["tmp_name"], $path);
+      header("Location: http://localhost/adminMain.php?msg=Produto Atualizado com Sucesso&type=success");
+   }else if($result){
+      header("Location: http://localhost/adminMain.php?msg=Produto Editado com Sucesso&type=success");
+   }
+}
+}
+if(isset($_GET["id"])){
     $product = getProductById($_GET["id"]);
   }else{
     $product = getProductById($_POST["id"]);
@@ -103,6 +130,42 @@
             <?php
                if($imagem_error != ""){
                   echo "<p class='alert alert-warning'>". $imagem_error ."</p>";
+               }
+            ?>
+            <hr>
+            <div class="form-group">
+               <label for="inicio">Inicio desconto (Opcional):</label>
+               <input type="date" class="form-control" name="inicio" value='<?php 
+               if(isset($product["inicio"])){
+                  echo date("Y-m-d", strtotime($product["inicio"]));
+               }
+               ?>'>
+            </div>
+            <?php
+               if($inicio_error != ""){
+                  echo "<p class='alert alert-warning'>". $inicio_error ."</p>";
+               }
+            ?>
+            <div class="form-group">
+               <label for="final">Final desconto (Opcional):</label>
+               <input type="date" class="form-control" name="final"  value='<?php
+               if(isset($product["final"])){
+                  echo date("Y-m-d", strtotime($product["final"]));
+               }
+               ?>'>
+            </div>
+            <?php
+               if($final_error != ""){
+                  echo "<p class='alert alert-warning'>". $final_error ."</p>";
+               }
+            ?>
+            <div class="form-group">
+               <label for="desconto">Porcentagem de desconto (Opcional):</label>
+               <input type="number" min="0" max="100" step="1" class="form-control" name="desconto" value='<?php echo $product["desconto"] ?>'>
+            </div>
+            <?php
+               if($desconto_error != ""){
+                  echo "<p class='alert alert-warning'>". $desconto_error ."</p>";
                }
             ?>
             <button type="submit" class="btn btn-primary">Editar</button>

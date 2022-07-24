@@ -43,7 +43,7 @@
 ?>
 
     <br>
-    <div class="container card lg m-auto p-3 w-75">
+    <div class="container card lg m-auto p-3 w-75" style="min-height: 50vh;">
     <p class="center">Fazer login</p>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div class="form-group">
