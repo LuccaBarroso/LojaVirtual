@@ -34,4 +34,13 @@
     }
   }
 
+  function getTotal(){
+    $total = 0;
+    foreach(getCart() as $id => $quantity){
+      $product = getProductById($id);
+      $total += $product["preco"] * $quantity;
+    }
+    return $total;
+  }
+
 ?>
