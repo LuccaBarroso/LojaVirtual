@@ -3,6 +3,7 @@
      include_once("./view/base/top.php");
      include_once("./view/topNavBar.php");
      include_once("./banco/userAuth.php");
+     include_once("./banco/banner.php");
      redirectIfNotAdmin();
      if(isset( $_GET['msg'])){
         echo "
@@ -128,6 +129,61 @@
                                 echo '
                                     <div>
                                         Nenhum Produto encontrado.
+                                    </div>
+                                ';
+                            }
+                        ?>
+                        
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banners -->
+    <div class="col-lg-8 pt-4 grid-margin stretch-card m-auto">
+        <div class="card center pt-2 mt-2">
+            <div class="card-body">
+                <div class="container d-flex justify-content-between">
+                    <div class="">
+                        <h4 class="card-title">Banners</h4>
+                        <p class="card-description">
+                            Aqui você pode editar os Banners
+                        </p>
+                    </div>
+                    <div class="">
+                        <a href="./createNewBanner.php" class="btn rol btn-primary">Criar Novo</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Imagem</th>
+                        <th>start</th>
+                        <th>end</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            @require_once("./banco/produtos.php");
+                            $banners = getBanners();
+                            if($banners){
+                                foreach ($banners as $banner){
+                                    echo '
+                                        <tr>
+                                            <td>'.$banner['id'].'</td>
+                                            <td><img src="'.$banner["imagem"].'" class="d-block w-100" alt="..."></td>
+                                            <td>'.date ("d/m/Y",strtotime($banner['inicio'])).'</td>
+                                            <td>'.date ("d/m/Y",strtotime($banner['final'])).'</td>
+                                        </tr>                                
+                                    ';
+                                }
+                            }else{
+                                echo '
+                                    <div>
+                                        Nenhum Banner encontrado.
                                     </div>
                                 ';
                             }
