@@ -184,9 +184,24 @@
         </div>
         </a>
         <div class="d-flex justify-content-around font-weight-bold mt-4">
-            <span class="pt-1">$'.number_format($product["preco"], 2, ',', '.').'</span><span><a href="./addProductToCart.php?id='.$product["id"].'" class="btn btn-success mb-2">Adicionar</a></span>
+            <span class="pt-1">$'.number_format($product["preco"], 2, ',', '.').'</span>
+            <span><a href="./addProductToCart.php?id='.$product["id"].'" class="btn btn-success mb-2">Adicionar</a></span>
         </div>
     </div>
     ';
+  }
+
+  function getMostRecentProduct(){
+    require("./banco/database.php");
+    $sql = "SELECT * FROM produtos order by id desc limit 1";
+    $result = mysqli_query($db, $sql);
+    if($result!=null){
+        if(mysqli_num_rows($result) > 0){
+        $produto = mysqli_fetch_array($result);
+        return $produto;
+        }else{
+        return false;
+        }
+    }
   }
 ?>

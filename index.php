@@ -64,8 +64,42 @@
             }
         ?>
 
+        <!-- newsletter -->
+        <div class="row mt-3">
+            <div class="card text-white bg-dark mt-3 col mr-2">
+                <div class="card-body">
+                    <h4 class="card-title">Newsletter</h4>
+                    <p class="card-text">Preencha seu e-mail e fique por dentro dos melhores descontos.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seu e-mail">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-3 col">
+                <?php
+                    $product = getMostRecentProduct();
+                    if($product != null){
+                        echo '
+                            <div class="card mt-3 m-auto">
+                                <h4 class="card-title p-2">Nosso Mais novo Produto:</h4>
+                                <div class="card-body row">
+                                    <div class="col"><img class="d-block" src="'.$product["imagem"].'" style="height:200px;"/> </div>
+                                    <div class="col text-center">
+                                        <p class="card-text">'.$product["nome"].'</p>
+                                        <p class="pt-1">R$'.number_format($product["preco"], 2, ',', '.').'</p>
+                                        <a href="addProductToCart.php?id='.$product["id"].'" class="btn btn-primary">Adicionar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        ';
+                    }
+                ?>
+            </div>
+        </div>
     </div>
-    <!-- Footer -->
 
 <?php
     include_once("./view/base/bottom.php");
