@@ -1,4 +1,4 @@
-<footer class="text-center text-lg-start bg-dark text-white mt-5">
+<footer class="text-center text-lg-start bg-dark text-white mt-2">
   <!-- Section: Links  -->
   <section class="pt-2">
     <div class="container text-center text-md-start mt-5">

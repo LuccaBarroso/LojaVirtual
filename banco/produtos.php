@@ -204,4 +204,23 @@
         }
     }
   }
+  
+  function getSearchResult($termo){
+    require("./banco/database.php");
+    $sql = "SELECT * FROM produtos where nome like '%".$termo."%'";
+    $result = mysqli_query($db, $sql);
+    if($result!=null){
+        if(mysqli_num_rows($result) > 0){
+        $produtos = array();
+        while($produtoAtual = mysqli_fetch_array($result)){
+          array_push($produtos, $produtoAtual);
+        }
+        return $produtos;
+        }else{
+        return false;
+        }
+    }else{
+      return null;
+    }
+  }
 ?>
