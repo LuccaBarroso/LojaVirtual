@@ -36,7 +36,14 @@
          $admin = 0;
       }
       if($email_error == "" && $nome_error == ""){
-         $extra_error = updateUser($id, $nome, $email, $admin);
+         $result = updateUser($id, $nome, $email, $admin);
+         if( $result == true){
+            header("Location: http://localhost/adminMain.php?msg=Usuario Atualizado com Sucesso&type=success");
+         }else if($result == false){
+            header("Location: http://localhost/adminMain.php?msg=Erro ao Atualizar Usuario&type=danger");
+         }else{
+            $extra_error = $result;
+         }
       }
    }
    if(isset($_GET["id"])){

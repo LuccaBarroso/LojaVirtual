@@ -118,18 +118,17 @@
 
   function updateUser($id, $nome, $email, $admin){
     require("./banco/database.php");
-
     //obs: admin 1 ou 0;
     if($admin != 1 && $admin != 0){
       return false;
     }
-
+    
     //checar se o email é valido
     $user = getUserByEmail($email);
     if($user &&  $user["id"] != $id){
       return "Já  temos outro usuário com esse email!";
     }
-
+    
     $sql = "UPDATE usuarios SET 
       nome='".$nome."',
       email='".$email."',
@@ -137,9 +136,17 @@
       WHERE id=".$id;
 
     if (mysqli_query($db, $sql)) {
-      header("Location: http://localhost/adminMain.php?msg=Usuario Atualizado com Sucesso&type=success");
+      if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+      }
+      $_SESSION["id"] = $user["id"];
+      $_SESSION["nome"] = $user["nome"];
+      if($user["admin"]){
+        $_SESSION["admin"] = $user["admin"];
+      }
+      return "success";
     }else{
-      header("Location: http://localhost/adminMain.php?msg=Falha ao Atualizar o Usuário&type=danger");
+      return false;
     }
   }
 

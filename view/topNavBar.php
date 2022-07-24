@@ -32,7 +32,7 @@
                 ';
               }
               ?>
-          <a class="nav-item nav-link " href="./cart.php" data-toggle="tooltip" data-placement="bottom" title="Carrinho">
+          <a class="nav-item nav-link mr-2" href="./cart.php" data-toggle="tooltip" data-placement="bottom" title="Carrinho">
             <i class=" bi-cart-fill"></i>
           </a>
       </div>
