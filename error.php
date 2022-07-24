@@ -1,7 +1,7 @@
 <?php 
 echo $_GET['link']; 
 include("base/top.php");
-include_once("./view/base/initSection.php");
+include_once("./view/topNavBar.php");
 
 ?>
 

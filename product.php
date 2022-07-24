@@ -3,7 +3,7 @@
     // require("model/userAuth.php");
     include_once("./view/base/top.php");
     include_once("./banco/produtos.php");
-    include_once("./view/base/initSection.php");
+    include_once("./view/topNavBar.php");
 
     $product = getProductById($_GET["id"]);
     viewProduct($_GET["id"]);

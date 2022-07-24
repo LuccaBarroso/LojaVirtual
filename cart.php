@@ -3,7 +3,7 @@
   include("banco/cart.php");
   include_once("./view/base/top.php");
   include_once("./banco/produtos.php");
-  include_once("./view/base/initSection.php");
+  include_once("./view/topNavBar.php");
 ?>
     <div class="container p-2">
       <h4>Carrinho</h4>

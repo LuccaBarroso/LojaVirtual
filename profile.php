@@ -1,7 +1,7 @@
 <?php
     $title="Login";
     include_once("./view/base/top.php"); 
-    include_once("./view/base/initSection.php");
+    include_once("./view/topNavBar.php");
     include_once("./banco/userAuth.php");
 
 

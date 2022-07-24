@@ -2,7 +2,7 @@
     $title="Register";
     // require("model/userAuth.php");
     include_once("./view/base/top.php");
-    include_once("./view/base/initSection.php");
+    include_once("./view/topNavBar.php");
     include_once("./banco/userAuth.php");
 
     $senha_error = $email_error = $nome_error = "";
