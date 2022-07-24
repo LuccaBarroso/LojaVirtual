@@ -7,7 +7,8 @@
      include_once("./banco/database.php");
      redirectIfNotAdmin();
 
-     $nome_error = $descricao_error = $preco_error = $imagem_error  = "";
+     $nome_error = $descricao_error = $preco_error = $imagem_error = $inicio_error = $final_error = $desconto_error = "";
+     $inicio = $final = $desconto = "";
      
      if($_SERVER["REQUEST_METHOD"] == "POST"){
       
@@ -31,7 +32,17 @@
       if($preco == ""){
          $preco_error = "É necessário que o produto tenha um preco!";
       }
-
+      
+      if(isset($_POST["inicio"])){
+         $inicio = htmlspecialchars($_POST["inicio"]);
+      }
+      if(isset($_POST["final"])){
+         $final = htmlspecialchars($_POST["final"]);
+      }
+      if(isset($_POST["desconto"])){
+         $desconto = htmlspecialchars($_POST["desconto"]);
+      }
+      
       if($preco_error == "" && $descricao_error == "" && $nome_error == ""){
          if(!empty($_FILES["imagem"]["name"])) {
             $fileName = $_FILES["imagem"]["name"];
@@ -39,7 +50,24 @@
             $path = "./uploads/produtos/".$nome.rand().".".$fileType;
             
             if(in_array($fileType, array('jpg','png','jpeg'))){
-               if(createNewProduct($nome, $descricao, $preco, $path)){
+               $result = "";
+               if($inicio == "" && $final == "" && $desconto == ""){
+                  $result = createNewProduct($nome, $descricao, $preco, $path);
+               }else{
+                  if($inicio == ""){
+                     $inicio_error = "É necessário que o produto tenha uma data de início de desconto ou não tenha nenhuma informação de desconto!";
+                  }else if($final == ""){
+                     $final_error = "É necessário que o produto tenha uma data de final de desconto ou não tenha nenhuma informação de desconto!";
+                  }else if($desconto == ""){
+                     $desconto_error = "É necessário que o produto tenha uma porcentagem de desconto ou não tenha nenhuma informação de desconto!";
+                  }else if($desconto < 0 || $desconto > 100){
+                        $desconto_error = "É necessário que o produto tenha uma porcentagem de desconto entre 0 e 100 ou não tenha nenhuma informação de desconto!";
+                  }else{
+                     $result = createNewProduct($nome, $descricao, $preco, $path, $inicio, $final, $desconto);
+                  }
+               }
+               
+               if($result){
                   move_uploaded_file($_FILES["imagem"]["tmp_name"], $path);
                   header("Location: http://localhost/adminMain.php?msg=Produto Criado com Sucesso&type=success");
                }
@@ -90,6 +118,34 @@
             <?php
                if($imagem_error != ""){
                   echo "<p class='alert alert-warning'>". $imagem_error ."</p>";
+               }
+            ?>
+            <hr>
+            <div class="form-group">
+               <label for="inicio">Inicio desconto (Opcional):</label>
+               <input type="date" class="form-control" name="inicio">
+            </div>
+            <?php
+               if($inicio_error != ""){
+                  echo "<p class='alert alert-warning'>". $inicio_error ."</p>";
+               }
+            ?>
+            <div class="form-group">
+               <label for="final">Final desconto (Opcional):</label>
+               <input type="date" class="form-control" name="final">
+            </div>
+            <?php
+               if($final_error != ""){
+                  echo "<p class='alert alert-warning'>". $final_error ."</p>";
+               }
+            ?>
+            <div class="form-group">
+               <label for="desconto">Porcentagem de desconto (Opcional):</label>
+               <input type="number" min="0" max="100" step="1" class="form-control" name="desconto">
+            </div>
+            <?php
+               if($desconto_error != ""){
+                  echo "<p class='alert alert-warning'>". $desconto_error ."</p>";
                }
             ?>
             <button type="submit" class="btn btn-primary">Criar</button>

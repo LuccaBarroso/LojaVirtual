@@ -100,6 +100,9 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Preço</th>
+                        <th>Desconto</th>
+                        <th>Inicio Desconto</th>
+                        <th>Final Desconto</th>
                         <th>Modificar</th>
                     </tr>
                     </thead>
@@ -109,11 +112,24 @@
                             $products = getProducts();
                             if($products){
                                 foreach ($products as $product){
+                                    $inicioProduto = $finalProduto = $descontoProduto = "Sem Desconto";
+                                    if(isset($product['inicio'])){
+                                        $inicioProduto = date ("d/m/Y",strtotime($product['inicio']));
+                                    }
+                                    if(isset($product['final'])){
+                                        $finalProduto = date ("d/m/Y",strtotime($product['final']));
+                                    }
+                                    if(isset($product['desconto'])){
+                                        $descontoProduto = $product['desconto']."%";
+                                    }
                                     echo '
                                         <tr>
                                             <td>'.$product['id'].'</td>
                                             <td>'.$product['nome'].'</td>
                                             <td>'.$product['preco'].'</td>
+                                            <td>'.$descontoProduto.'</td>
+                                            <td>'.$inicioProduto.'</td>
+                                            <td>'.$finalProduto.'</td>
                                             <td>
                                                 <a href="./updateProduct.php?id='.$product['id'].'" class="btn btn-outline-primary" style="height:40px;">
                                                     <p>Editar</p>

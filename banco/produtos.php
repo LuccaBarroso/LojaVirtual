@@ -5,7 +5,10 @@
     `descricao` VARCHAR(255) NOT NULL,
     `preco` DECIMAL(10,2) NOT NULL,
     `imagem` VARCHAR(255) NOT NULL,
-     `view` INT NOT NULL DEFAULT 0,
+    `inicio` DATETIME,
+    `final` DATETIME,
+    `desconto` INT,
+    `view` INT NOT NULL DEFAULT 0,
     primary key(id)
   );
 -->
@@ -27,16 +30,31 @@
     }
   }
   
-  function createNewProduct($nome, $descricao, $preco, $imagem){
-    require("./banco/database.php");
-    $sql = "INSERT INTO produtos (nome, descricao, preco, imagem) VALUES (?, ?, ?, ?)";
-    $stmt = mysqli_prepare($db, $sql);
-    mysqli_stmt_bind_param($stmt, "ssds", $param_nome, $param_descricao, $param_preco, $param_imagem);
-    
-    $param_nome = $nome;
-    $param_descricao = $descricao;
-    $param_preco = $preco;
-    $param_imagem = $imagem;
+  function createNewProduct($nome, $descricao, $preco, $imagem, $inicio=false, $final=false, $desconto=false){
+    if($inicio==false || $final==false || $desconto==false){
+      require("./banco/database.php");
+      $sql = "INSERT INTO produtos (nome, descricao, preco, imagem) VALUES (?, ?, ?, ?)";
+      $stmt = mysqli_prepare($db, $sql);
+      mysqli_stmt_bind_param($stmt, "ssds", $param_nome, $param_descricao, $param_preco, $param_imagem);
+      
+      $param_nome = $nome;
+      $param_descricao = $descricao;
+      $param_preco = $preco;
+      $param_imagem = $imagem;
+    }else{
+      require("./banco/database.php");
+      $sql = "INSERT INTO produtos (nome, descricao, preco, imagem, inicio, final, desconto) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      $stmt = mysqli_prepare($db, $sql);
+      mysqli_stmt_bind_param($stmt, "ssdsssi", $param_nome, $param_descricao, $param_preco, $param_imagem, $param_inicio, $param_final, $param_desconto);
+      
+      $param_nome = $nome;
+      $param_descricao = $descricao;
+      $param_preco = $preco;
+      $param_imagem = $imagem;
+      $param_inicio = date ('Y-m-d H:i:s',strtotime($inicio));
+      $param_final = date ('Y-m-d H:i:s',strtotime($final));
+      $param_desconto = $desconto;
+    }
     
 
     //tenta executar
