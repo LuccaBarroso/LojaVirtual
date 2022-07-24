@@ -4,26 +4,30 @@
     include_once("./view/base/top.php");
     include_once("./banco/produtos.php");
     include_once("./view/topNavBar.php");
+    include_once("./banco/banner.php");
+
+
+    $banners = getValidBanners();
     
 ?>
 
     <!-- Banner -->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <?php
+                foreach($banners as $key => $banner){
+                    echo '<li data-target="#carouselExampleIndicators" data-slide-to="'.$key.'" class="'.($key == 0 ? 'active' : '').'"></li>';
+                }
+            ?>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-            <img src="//via.placeholder.com/500x100/123476" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-            <img src="//via.placeholder.com/500x100/1234ff" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-            <img src="//via.placeholder.com/500x100/12ff00" class="d-block w-100" alt="...">
-            </div>
+            <?php
+                foreach($banners as $key => $banner){
+                    echo '<div class="carousel-item '.($key == 0 ? 'active' : '').'">
+                            <img class="d-block w-100" src="'.$banner["imagem"].'" alt="'.$banner["imagem"].'">
+                        </div>';
+                }
+            ?>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

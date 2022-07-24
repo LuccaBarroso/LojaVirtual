@@ -15,11 +15,30 @@ function getBanners(){
  $result = mysqli_query($db, $sql);
  if($result!=null){
      if(mysqli_num_rows($result) > 0){
-     $produtos = array();
+     $banners = array();
      while($produtoAtual = mysqli_fetch_array($result)){
-       array_push($produtos, $produtoAtual);
+       array_push($banners, $produtoAtual);
      }
-     return $produtos;
+     return $banners;
+     }else{
+     return false;
+     }
+ }
+}
+
+function getValidBanners(){
+ require("./banco/database.php");
+ $sql = "SELECT * FROM banner order by id";
+ $result = mysqli_query($db, $sql);
+ if($result!=null){
+     if(mysqli_num_rows($result) > 0){
+     $banners = array();
+     while($produtoAtual = mysqli_fetch_array($result)){
+      if(strtotime($produtoAtual['inicio']) <= time() && strtotime($produtoAtual['final']) >= time()){
+       array_push($banners, $produtoAtual);
+      }
+     }
+     return $banners;
      }else{
      return false;
      }
@@ -48,7 +67,7 @@ function createNewBanner($imagem, $inicio, $final){
 function deleteBanner($id){
  require("./banco/database.php");
  $imgPath = getBannerById($id)["imagem"];
- $sql = "DELETE FROM produtos WHERE id=".$id;
+ $sql = "DELETE FROM banner WHERE id=".$id;
  if(mysqli_query($db, $sql)){
    unlink($imgPath);
    header("Location: http://localhost/adminMain.php?msg=Produto Deletado com Sucesso&type=success");
@@ -59,7 +78,7 @@ function deleteBanner($id){
 
 function getBannerById($id){
  require("./banco/database.php");
- $sql = "SELECT * FROM produtos where id=".$id;
+ $sql = "SELECT * FROM banner where id=".$id;
  $result = mysqli_query($db, $sql);
  if($result!=null){
    return mysqli_fetch_assoc($result);
@@ -68,7 +87,7 @@ function getBannerById($id){
  }
 }
 
-function updateBanner($id, $nome, $descricao, $preco, $imagem=false){
+function updateBanner($id, $inicio, $final, $imagem=false){
  require("./banco/database.php");
  $oldPath = getBannerById($id)["imagem"];
  if($imagem == false){
@@ -77,10 +96,9 @@ function updateBanner($id, $nome, $descricao, $preco, $imagem=false){
    unlink($oldPath);
  }
 
- $sql = "UPDATE produtos SET 
-   nome='".$nome."',
-   descricao='".$descricao."',
-   preco='".$preco."',
+ $sql = "UPDATE banner SET 
+   inicio='".$inicio."',
+   final='".$final."',
    imagem='".$imagem."'
    WHERE id=".$id;
 
@@ -97,40 +115,5 @@ function viewBanner($id){
  if (mysqli_query($db, $sql)) {
   return true; 
  }
-}
-
-function getMostViewedBanners(){
- require("./banco/database.php");
- $sql = "SELECT * FROM produtos order by view desc limit 8";
- $result = mysqli_query($db, $sql);
- if($result!=null){
-     if(mysqli_num_rows($result) > 0){
-     $produtos = array();
-     while($produtoAtual = mysqli_fetch_array($result)){
-       array_push($produtos, $produtoAtual);
-     }
-     return $produtos;
-     }else{
-     return false;
-     }
- }
-}
-
-function generateBannerHTML($Banner){
- echo '
- <div class="card p-1 pt-3 m-2">
-     <a href="./Banner.php?id='.$Banner["id"].'" class="text-dark">
-     <img src="'.$Banner["imagem"].'"
-     class="card-img-top" alt="placeholder" style="width: 250px;"/>
-     <div class="d-flex">
-         <h5 class="card-title mr-auto ml-2">'.$Banner["nome"].'</h5>
-         <p class="mr-1">'.$Banner["view"].'<i class="bi-eye pl-1"></i></p>
-     </div>
-     </a>
-     <div class="d-flex justify-content-around font-weight-bold mt-4">
-         <span class="pt-1">$'.number_format($Banner["preco"], 2, ',', '.').'</span><span><a href="./addBannerToCart.php?id='.$Banner["id"].'" class="btn btn-success mb-2">Adicionar</a></span>
-     </div>
- </div>
- ';
 }
 ?>

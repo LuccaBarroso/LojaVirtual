@@ -163,6 +163,7 @@
                         <th>Imagem</th>
                         <th>start</th>
                         <th>end</th>
+                        <th>modificar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -177,6 +178,14 @@
                                             <td><img src="'.$banner["imagem"].'" class="d-block w-100" alt="..."></td>
                                             <td>'.date ("d/m/Y",strtotime($banner['inicio'])).'</td>
                                             <td>'.date ("d/m/Y",strtotime($banner['final'])).'</td>
+                                            <td class="text-center">
+                                                <a href="./updateBanner.php?id='.$banner['id'].'" class="btn btn-outline-primary" style="height:40px;">
+                                                    <p>Editar</p>
+                                                </a>
+                                                <a href="./deleteBanner.php?id='.$banner['id'].'" class="btn btn-danger " style="height:40px;">
+                                                    <p>Deletar</p>
+                                                </a>
+                                            </td>
                                         </tr>                                
                                     ';
                                 }
