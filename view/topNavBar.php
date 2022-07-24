@@ -51,6 +51,12 @@
             <i class=" bi-person-fill"></i>
           </a>';
         }
+        if(isAdmin()){
+          echo '
+          <a class="nav-item nav-link " href="./adminMain.php" data-toggle="tooltip" data-placement="bottom" title="Admin">
+            <i class=" bi-tools"></i>
+          </a>';
+        }
         ?>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <?php
      $title="Admin";
      include_once("./view/base/top.php");
-     include_once("./view/topNavBarAdmin.php");
+     include_once("./view/topNavBar.php");
      include_once("./banco/userAuth.php");
      redirectIfNotAdmin();
      if(isset( $_GET['msg'])){
