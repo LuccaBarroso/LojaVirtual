@@ -1,5 +1,5 @@
 <?php
-  $title="Home";
+  $title="Carrinho";
   include("banco/cart.php");
   include_once("./view/base/top.php");
   include_once("./banco/produtos.php");

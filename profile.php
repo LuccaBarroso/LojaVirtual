@@ -1,5 +1,5 @@
 <?php
-    $title="Login";
+    $title="Profile";
     include_once("./view/base/top.php"); 
     include_once("./view/topNavBar.php");
     include_once("./banco/userAuth.php");
