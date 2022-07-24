@@ -51,17 +51,19 @@
                 }
                 ?>
         </div>
-        <h4 class="row pt-4">Todos os Produtos:</h4>
-        <div class="row">
-            <?php
-            $products = getProducts();
-            if($products != null){
-                foreach($products as $product){
-                    echo generateProductHTML($product);
-                }
+        <?php 
+            $produtosComDesconto = getDiscountProducts();
+            if($produtosComDesconto != null){
+                echo '<h4 class="row pt-4">Produtos com Desconto:</h4>';
+                echo '<Div class="row">';
+                    foreach($produtosComDesconto as $product){
+                        echo generateProductHTML($product);
+                    }
+                echo '</div>';
+                
             }
-            ?>
-        </div>
+        ?>
+
     </div>
     <!-- Footer -->
 

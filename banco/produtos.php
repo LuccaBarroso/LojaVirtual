@@ -148,12 +148,36 @@
     }
   }
 
+  function getDiscountProducts(){
+    require("./banco/database.php");
+    $sql = "SELECT * FROM produtos order by id";
+    $result = mysqli_query($db, $sql);
+    if($result!=null){
+        if(mysqli_num_rows($result) > 0){
+          $produtos = array();
+          while($produtoAtual = mysqli_fetch_array($result)){
+            if(isset($produtoAtual["desconto"]) && strtotime($produtoAtual['inicio']) <= time() && strtotime($produtoAtual['final']) >= time()){
+              array_push($produtos, $produtoAtual);
+            }
+          }
+          return $produtos;
+        }else{
+          return false;
+        }
+    }
+  }
+
   function generateProductHTML($product){
+    $discount = "";
+    if(isset($product["desconto"]) && strtotime($product['inicio']) <= time() && strtotime($product['final']) >= time()){
+      $discount = "<div class='relative text-center bg-success text-light'>DESCONTO DE ".$product["desconto"]."%</div>";
+    }
     echo '
     <div class="card p-1 pt-3 m-2">
         <a href="./product.php?id='.$product["id"].'" class="text-dark">
         <img src="'.$product["imagem"].'"
-        class="card-img-top" alt="placeholder" style="width: 250px;"/>
+        class="card-img-top" alt="placeholder" style="width: 250px;"/>'.
+        $discount.'
         <div class="d-flex">
             <h5 class="card-title mr-auto ml-2">'.$product["nome"].'</h5>
             <p class="mr-1">'.$product["view"].'<i class="bi-eye pl-1"></i></p>

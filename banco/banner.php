@@ -33,9 +33,9 @@ function getValidBanners(){
  if($result!=null){
      if(mysqli_num_rows($result) > 0){
      $banners = array();
-     while($produtoAtual = mysqli_fetch_array($result)){
-      if(strtotime($produtoAtual['inicio']) <= time() && strtotime($produtoAtual['final']) >= time()){
-       array_push($banners, $produtoAtual);
+     while($bannerAtual = mysqli_fetch_array($result)){
+      if(strtotime($bannerAtual['inicio']) <= time() && strtotime($bannerAtual['final']) >= time()){
+       array_push($banners, $bannerAtual);
       }
      }
      return $banners;
