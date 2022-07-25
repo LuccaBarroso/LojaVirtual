@@ -1,8 +1,8 @@
 <?php
     $DB_SERVER = "localhost";
     $DB_USERNAME = "root";
-    // $DB_PASSWORD= "mynewpassword";
-    $DB_PASSWORD= "";
+    $DB_PASSWORD= "mynewpassword";
+    // $DB_PASSWORD= "";
     $DB_NAME= "LojaVirtual";
      
     //tenta conectar com banco

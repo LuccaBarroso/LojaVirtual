@@ -38,7 +38,12 @@
     $total = 0;
     foreach(getCart() as $id => $quantity){
       $product = getProductById($id);
-      $total += $product["preco"] * $quantity;
+      if(isset($product["desconto"])){
+        $valorReal = ($product["preco"]/100)*(100 - $product["desconto"]);
+        $total += $valorReal * $quantity;
+      }else{
+        $total += $product["preco"] * $quantity;
+      }
     }
     return $total;
   }

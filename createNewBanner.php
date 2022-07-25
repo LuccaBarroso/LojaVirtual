@@ -34,8 +34,12 @@
             
             if(in_array($fileType, array('jpg','png','jpeg'))){
                if(createNewBanner($path, $inicio, $final)){
-                  move_uploaded_file($_FILES["imagem"]["tmp_name"], $path);
-                  header("Location: http://localhost/adminMain.php?msg=Produto Criado com Sucesso&type=success");
+                  if(move_uploaded_file($_FILES["imagem"]["tmp_name"], $path)){
+                     header("Location: http://localhost/adminMain.php?msg='Criado com sucesso'&type=success");
+                  }else{
+                     header("Location: http://localhost/adminMain.php?msg='Algo deu errado com a imagem".$path."'&type=warning");
+                  }
+                  // header("Location: http://localhost/adminMain.php?msg=Produto Criado com Sucesso&type=success");
                }
             }else{ 
               $imagem_error = 'Só são permitidos os formatos JPG, JPEG e PNG.'; 

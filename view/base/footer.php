@@ -1,4 +1,4 @@
-<footer class="text-center text-lg-start bg-dark text-white mt-2">
+<footer class="text-center text-lg-start bg-dark text-white mt-4">
   <!-- Section: Links  -->
   <section class="pt-2">
     <div class="container text-center text-md-start mt-5">
@@ -42,7 +42,7 @@
           <h6 class="text-uppercase fw-bold mb-4 pt-3">
             Onde
           </h6>
-          <p><i class="bi-house-fill"></i> Rua dos bobos, N 0, Fortaleza, Brasil.</p>
+          <p><i class="bi-house-fill"></i> Rua dos bobos, N 0, Fortaleza-CE, Brasil.</p>
         </div>
         <!-- Grid column -->
       </div>

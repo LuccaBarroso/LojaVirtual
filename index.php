@@ -24,7 +24,7 @@
             <?php
                 foreach($banners as $key => $banner){
                     echo '<div class="carousel-item '.($key == 0 ? 'active' : '').'">
-                            <img class="d-block w-100" src="'.$banner["imagem"].'" alt="'.$banner["imagem"].'">
+                            <img class="d-block w-100" src="'.$banner["imagem"].'">
                         </div>';
                 }
             ?>

@@ -21,7 +21,16 @@
                 <div class="col-md-6 text-center mt-2">
                   <h3>'.$product["nome"].'</h3>
                   <p>'.$product["descricao"].'</p>
-                  <p>R$ '.number_format($product["preco"]*$quantity, 2, ",", ".").'</p>
+                  <p>R$';
+
+                  if(isset($product["desconto"])){
+                    $valorReal = ($product["preco"]/100)*(100 - $product["desconto"]);
+                    echo number_format($valorReal*$quantity, 2, ",", ".");
+                  }else{
+                    echo number_format($product["preco"]*$quantity, 2, ",", ".");
+                  }
+
+                  echo '</p>
                   <div class="row text-center m-3">
                     <a href="./removeProductFromCart.php?id='.$id.'" class="m-auto btn btn-danger p-2"><i class="bi-dash-lg"></i></a>
                     <p class="m-auto">Quantidade: '.$quantity.'</p>
